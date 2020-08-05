@@ -3,7 +3,7 @@
 }
 
 @model UniversityRegistrar.Models.Student
-
+@using UniversityRegistrar.Models
 <h2>Student Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.StudentName): @Html.DisplayFor(model => model.StudentName)</h3>
@@ -16,7 +16,10 @@ else
 {
   <h4>Course to which the student belongs:</h4>
 }
- 
+
+@Html.ActionLink($"{Model.Department.DepartmentName}", "Details", "Departments", new {id = Model.DepartmentId} )
+
+
 
 <ul>
 @foreach(var join in Model.Courses)

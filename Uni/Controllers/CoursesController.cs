@@ -33,6 +33,8 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "DepartmentName");
+     
       return View();
     }
 
@@ -47,6 +49,7 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Details(int id)
     {
       var thisCourse = _db.Courses
+          .Include(course => course.Department)
           .Include(course => course.Students)
           .ThenInclude(join => join.Student)
           .FirstOrDefault(course => course.CourseId == id);

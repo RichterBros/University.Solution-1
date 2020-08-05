@@ -74,6 +74,7 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Details(int id)
     {
       var thisStudent = _db.Students
+        .Include(student => student.Department)
         .Include(student => student.Courses)// join enitities of courseitem.
         .ThenInclude(join => join.Course)
         .FirstOrDefault(student => student.StudentId == id);
