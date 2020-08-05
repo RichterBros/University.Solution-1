@@ -54,12 +54,14 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Create()
     {
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
+      ViewBag.DepartmentId= new SelectList(_db.Departments, "DepartmentId", "DepartmentName");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Student student, int CourseId)
+    public ActionResult Create(Student student, int CourseId, int DepartmentId )
     {
+      _db.Students.Add(new Student() {DepartmentId = DepartmentId});
       _db.Students.Add(student);
       if(CourseId !=0)
         {

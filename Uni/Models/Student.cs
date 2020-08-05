@@ -9,7 +9,7 @@ namespace UniversityRegistrar.Models
         {
             this.Courses = new HashSet<StudentCourse>();
         }
-
+        public int DepartmentId;
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public DateTime EnrollmentDate { get; set; }
