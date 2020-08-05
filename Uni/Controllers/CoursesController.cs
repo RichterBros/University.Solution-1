@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using UniversityRegistrar.Models;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using UniversityRegistrar.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+
 
 namespace UniversityRegistrar.Controllers
 {
@@ -34,7 +36,7 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Create()
     {
       ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "DepartmentName");
-     
+     ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View();
     }
 
