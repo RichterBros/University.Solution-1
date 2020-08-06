@@ -70,9 +70,10 @@ namespace UniversityRegistrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+ 
     public ActionResult Details(int id)
     {
+      ViewBag.thisDepartment = _db.Departments.ToList();
       var thisStudent = _db.Students
         .Include(student => student.Department)
         .Include(student => student.Courses)// join enitities of courseitem.
@@ -109,7 +110,7 @@ namespace UniversityRegistrar.Controllers
     public ActionResult DeleteConfirmed(int id)
     {
       var thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
-      _db.Students.Remove(thisStudent);
+      _db.Students.Remove(thisStudent); 
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
