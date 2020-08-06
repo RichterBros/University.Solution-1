@@ -59,9 +59,8 @@ namespace UniversityRegistrar.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Student student, int CourseId, int DepartmentId )
+    public ActionResult Create(Student student, int CourseId)
     {
-      _db.Students.Add(new Student() {DepartmentId = DepartmentId});
       _db.Students.Add(student);
       if(CourseId !=0)
         {
@@ -75,15 +74,11 @@ namespace UniversityRegistrar.Controllers
     {
       var thisStudent = _db.Students
         .Include(student => student.Department)
-        .Include(student => student.Courses)// join enitities of courseitem.
+        .Include(student => student.Courses)
         .ThenInclude(join => join.Course)
         .FirstOrDefault(student => student.StudentId == id);
-  
+
         ViewBag.value = _db.Departments.FirstOrDefault(x => x.DepartmentId == thisStudent.DepartmentId);
-        
-
-        // send details a value indicating whether the dept has been deleted.
-
       return View(thisStudent);
     }
 
