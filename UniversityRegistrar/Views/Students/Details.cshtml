@@ -17,11 +17,11 @@
 else
 {
   <h4>Course to which the student belongs:</h4>
- 
 }
-@if(ViewBag.thisDepartment.Count == 0)
+
+@if(ViewBag.value == null)
 {
-  <p>This student does not belong to any dept</p>
+  <p>This student does not belong to any dept or the dept has been deleted</p>
 }
 else
 {

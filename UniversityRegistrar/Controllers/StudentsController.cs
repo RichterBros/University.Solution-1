@@ -73,12 +73,17 @@ namespace UniversityRegistrar.Controllers
  
     public ActionResult Details(int id)
     {
-      ViewBag.thisDepartment = _db.Departments.ToList();
       var thisStudent = _db.Students
         .Include(student => student.Department)
         .Include(student => student.Courses)// join enitities of courseitem.
         .ThenInclude(join => join.Course)
         .FirstOrDefault(student => student.StudentId == id);
+  
+        ViewBag.value = _db.Departments.FirstOrDefault(x => x.DepartmentId == thisStudent.DepartmentId);
+        
+
+        // send details a value indicating whether the dept has been deleted.
+
       return View(thisStudent);
     }
 
