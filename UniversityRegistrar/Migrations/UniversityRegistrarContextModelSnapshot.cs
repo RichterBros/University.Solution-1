@@ -85,14 +85,14 @@ namespace University_Registrar.Migrations
 
             modelBuilder.Entity("UniversityRegistrar.Models.Course", b =>
                 {
-                    b.HasOne("UniversityRegistrar.Models.Department")
+                    b.HasOne("UniversityRegistrar.Models.Department", "Department")
                         .WithMany("Courses")
                         .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("UniversityRegistrar.Models.Student", b =>
                 {
-                    b.HasOne("UniversityRegistrar.Models.Department")
+                    b.HasOne("UniversityRegistrar.Models.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("DepartmentId");
                 });

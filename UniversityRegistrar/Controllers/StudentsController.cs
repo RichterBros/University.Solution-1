@@ -59,9 +59,8 @@ namespace UniversityRegistrar.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Student student, int CourseId, int DepartmentId )
+    public ActionResult Create(Student student, int CourseId)
     {
-      _db.Students.Add(new Student() {DepartmentId = DepartmentId});
       _db.Students.Add(student);
       if(CourseId !=0)
         {
@@ -70,14 +69,16 @@ namespace UniversityRegistrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+ 
     public ActionResult Details(int id)
     {
       var thisStudent = _db.Students
         .Include(student => student.Department)
-        .Include(student => student.Courses)// join enitities of courseitem.
+        .Include(student => student.Courses)
         .ThenInclude(join => join.Course)
         .FirstOrDefault(student => student.StudentId == id);
+
+        ViewBag.value = _db.Departments.FirstOrDefault(x => x.DepartmentId == thisStudent.DepartmentId);
       return View(thisStudent);
     }
 
@@ -109,7 +110,7 @@ namespace UniversityRegistrar.Controllers
     public ActionResult DeleteConfirmed(int id)
     {
       var thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
-      _db.Students.Remove(thisStudent);
+      _db.Students.Remove(thisStudent); 
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

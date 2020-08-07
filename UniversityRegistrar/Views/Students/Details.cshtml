@@ -1,3 +1,5 @@
+@using System.Linq;
+
 @{
   Layout = "_Layout";
 }
@@ -10,16 +12,21 @@
 
 @if(@Model.Courses.Count == 0)
 {
-  <p>This item does not belong to any course</p>
+  <p>This student does not belong to any course</p>
 }
 else
 {
   <h4>Course to which the student belongs:</h4>
 }
 
-@Html.ActionLink($"{Model.Department.DepartmentName}", "Details", "Departments", new {id = Model.DepartmentId} )
-
-
+@if(ViewBag.value == null)
+{
+  <p>This student does not belong to any dept or the dept has been deleted</p>
+}
+else
+{
+  @Html.ActionLink($"{Model.Department.DepartmentName}", "Details", "Departments", new {id = Model.DepartmentId} )
+}
 
 <ul>
 @foreach(var join in Model.Courses)
